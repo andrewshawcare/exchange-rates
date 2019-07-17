@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/andrewshawcare/exchange-rates.git",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-plugin-react": "^7.14.2",
+    "mocha": "^6.1.4",
+    "chai": "^4.2.0",
+    "jsdom": "^15.1.1",
+    "esm": "^3.2.25",
+    "prettier": "^1.18.2",
+    "rollup": "^1.17.0",
+    "nodemon": "^1.19.1"
+  }
+}
