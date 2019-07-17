@@ -13,5 +13,5 @@ There is a pre-push (update) git hook that runs the following activities:
 
 1. **Formatting**: Code is formatted using [Prettier](https://prettier.io/).
 2. **Linting**: Linting is handled using [ESLint](https://eslint.org/).
-3. **Testing**: Testing is performed using [Mocha](https://mochajs.org/).
+3. **Testing**: Testing is performed using [Jasmine](https://jasmine.github.io/).
 4. **Bundling**: Bundling is handled using [Rollup](https://rollupjs.org).

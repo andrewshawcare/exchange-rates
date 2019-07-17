@@ -3,9 +3,9 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^6.0.1",
+    "eslint-plugin-jasmine": "^2.10.1",
     "eslint-plugin-react": "^7.14.2",
-    "mocha": "^6.1.4",
-    "chai": "^4.2.0",
+    "jasmine": "^3.4.0",
     "jsdom": "^15.1.1",
     "esm": "^3.2.25",
     "prettier": "^1.18.2",

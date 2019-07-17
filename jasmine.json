@@ -1,0 +1,4 @@
+{
+  "spec_files": ["./{,!(dist|node_modules)/**}/test.js"],
+  "helpers": ["node_modules/esm","helpers/**/*.js"]
+}

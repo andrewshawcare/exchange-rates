@@ -1,0 +1,7 @@
+{
+  "files": ["./{,!(dist|node_modules)/**}/index.js"],
+  "tests": ["./{,!(dist|node_modules)/**}/test.js"],
+  "env": {
+    "kind": "chrome"
+  }
+}
