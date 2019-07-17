@@ -4,4 +4,4 @@ var Button = ({ label = "" } = {}) => {
   return buttonElement;
 };
 
-document.body.appendChild(Button({ label: "Hello, world!" }));
+document.body.appendChild(Button({ label: "Hello, world!?" }));
