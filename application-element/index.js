@@ -1,10 +1,6 @@
-var ButtonElement = ({ textLabel = "" } = {}) => {
-  const buttonElement = document.createElement("button");
-  buttonElement.innerText = textLabel;
-  return buttonElement;
-};
+import ButtonElement from "../button-element/index.js";
 
-var ApplicationElement = ({ fetchExchangeRatesButton = {} } = {}) => {
+export default ({ fetchExchangeRatesButton = {} } = {}) => {
   const applicationElement = document.createElement("section");
 
   const buttonElement = ButtonElement(fetchExchangeRatesButton);
@@ -17,11 +13,3 @@ var ApplicationElement = ({ fetchExchangeRatesButton = {} } = {}) => {
 
   return applicationElement;
 };
-
-document.body.appendChild(
-  ApplicationElement({
-    fetchExchangeRatesButton: {
-      textLabel: "Fetch exchange rates"
-    }
-  })
-);

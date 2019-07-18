@@ -1,5 +1,5 @@
-export default ({ label = "" } = {}) => {
+export default ({ textLabel = "" } = {}) => {
   const buttonElement = document.createElement("button");
-  buttonElement.innerText = label;
+  buttonElement.innerText = textLabel;
   return buttonElement;
 };

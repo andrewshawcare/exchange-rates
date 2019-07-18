@@ -1,7 +1,21 @@
 import { JSDOM } from "jsdom";
 
-// eslint-disable-next-line no-global-assign
-global.window = new JSDOM().window;
+const jsdom = new JSDOM(
+  `
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <title></title>
+    </head>
+    <body></body>
+  </html>
+  `,
+  { url: "http://localhost" }
+);
 
-// eslint-disable-next-line no-global-assign
-global.document = global.window.document;
+const filteredProperties = ["setTimeout"];
+Object.getOwnPropertyNames(jsdom.window)
+  .filter(ownPropertyName => !filteredProperties.includes(ownPropertyName))
+  .forEach(ownPropertyName => {
+    global[ownPropertyName] = jsdom.window[ownPropertyName];
+  });
