@@ -1,10 +1,40 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Displays the latest exchange rates" >
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Exchange Rates</title>
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+
+            table {
+                margin: 1rem 0;
+            }
+
+            .exchange.rates.table caption {
+                white-space: nowrap;
+            }
+
+            .exchange.rates.table th.currency.code,
+            .exchange.rates.table td.currency.code {
+                text-align: left;
+            }
+
+            .exchange.rates.table th.base.currency,
+            .exchange.rates.table td.base.currency {
+                text-align: right;
+            }
+        </style>
     </head>
     <body>
-        <script type="module" src="./dist/bundle.js"></script>
+        <script src="dist/bundle.js"></script>
     </body>
 </html>

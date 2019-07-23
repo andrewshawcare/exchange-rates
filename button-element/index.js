@@ -1,5 +1,9 @@
-export default ({ textLabel = "" } = {}) => {
+export default ({ text = "", onclick = () => {} } = {}) => {
   const buttonElement = document.createElement("button");
-  buttonElement.innerText = textLabel;
+
+  buttonElement.classList.add("button");
+  buttonElement.innerText = text;
+  buttonElement.onclick = onclick;
+
   return buttonElement;
 };

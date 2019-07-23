@@ -10,9 +10,10 @@ const jsdom = new JSDOM(
     <body></body>
   </html>
   `,
-  { url: "http://localhost" }
+  { pretendToBeVisual: true, url: "http://localhost" }
 );
 
+global.document = jsdom.window.document;
 const filteredProperties = ["setTimeout"];
 Object.getOwnPropertyNames(jsdom.window)
   .filter(ownPropertyName => !filteredProperties.includes(ownPropertyName))

@@ -1,22 +1,28 @@
 import ApplicationElement from "./index.js";
 
-describe("ApplicationElement", () => {
-  const buttonSelector = ".fetch.exchange.rates.button";
-  const tableSelector = ".exchange.rates.table";
-
-  it("Displays a fetch exchange rates button", () => {
+describe("Application element", () => {
+  it("displays a dialog", () => {
     const applicationElement = ApplicationElement();
-    const buttonElement = applicationElement.querySelector(buttonSelector);
+    const buttonElement = applicationElement.querySelector(".dialog");
+
+    expect(buttonElement.nodeName).toBe("DIALOG");
+  });
+
+  it("displays a fetch exchange rates button", () => {
+    const applicationElement = ApplicationElement();
+    const buttonElement = applicationElement.querySelector(
+      ".fetch.exchange.rates.button"
+    );
 
     expect(buttonElement.nodeName).toBe("BUTTON");
   });
 
-  it("Displays an exchange rates table", () => {
+  it("displays an exchange rates table", () => {
     const applicationElement = ApplicationElement();
-    const tableElement = applicationElement.querySelector(tableSelector);
+    const tableElement = applicationElement.querySelector(
+      ".exchange.rates.table"
+    );
 
     expect(tableElement.nodeName).toBe("TABLE");
   });
-
-  it("Displays exchange rate rows", () => {});
 });

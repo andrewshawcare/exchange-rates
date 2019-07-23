@@ -5,9 +5,17 @@ describe("Button", () => {
     expect(ButtonElement().nodeName).toBe("BUTTON");
   });
 
-  it("renders the text label correctly", () => {
-    const textLabel = "Lorem ipsum";
+  it("has the correct class", () => {
+    expect(ButtonElement().classList.contains("button")).toBe(true);
+  });
 
-    expect(ButtonElement({ textLabel: textLabel }).innerText).toBe(textLabel);
+  it("renders the text correctly", () => {
+    const text = "Lorem ipsum";
+
+    expect(ButtonElement({ text: text }).innerText).toBe(text);
+  });
+
+  it("responds to a click", async done => {
+    ButtonElement({ onclick: done }).click();
   });
 });
