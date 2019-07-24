@@ -1,19 +1,33 @@
 import TableElement from "./index.js";
+import ReactDOM from "react-dom";
 
 describe("Table element", () => {
-  it("is a table", () => {
-    expect(TableElement().nodeName).toBe("TABLE");
+  let containerElement;
+
+  beforeEach(() => {
+    containerElement = document.createElement("div");
+    document.body.appendChild(containerElement);
   });
 
-  it("has the table class", () => {
-    expect(TableElement().classList.contains("table")).toBe(true);
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("is a table", () => {
+    ReactDOM.render(TableElement(), containerElement);
+    const tableElement = containerElement.querySelector("table");
+
+    expect(tableElement.nodeName).toBe("TABLE");
   });
 
   it("has a caption", () => {
     const caption = { text: "Lorem ipsum" };
-    const tableElement = TableElement({ caption: caption });
+    ReactDOM.render(TableElement({ caption }), containerElement);
+    const tableElement = containerElement.querySelector("table");
 
-    expect(tableElement.querySelector("caption").innerText).toBe(caption.text);
+    expect(tableElement.querySelector("caption").textContent).toBe(
+      caption.text
+    );
   });
 
   it("has a header with an ordered list of headings", () => {
@@ -25,14 +39,15 @@ describe("Table element", () => {
         { text: "Amit" }
       ]
     };
-    const tableElement = TableElement({ header: header });
+    ReactDOM.render(TableElement({ header }), containerElement);
+    const tableElement = containerElement.querySelector("table");
 
     const headingElements = Array.from(
       tableElement.querySelectorAll("thead tr th")
     );
 
     headingElements.forEach((headingElement, index) => {
-      expect(headingElement.innerText).toBe(header.headings[index].text);
+      expect(headingElement.textContent).toBe(header.headings[index].text);
     });
   });
 
@@ -44,7 +59,8 @@ describe("Table element", () => {
         { classList: ["amit"] }
       ]
     };
-    const tableElement = TableElement({ header: header });
+    ReactDOM.render(TableElement({ header }), containerElement);
+    const tableElement = containerElement.querySelector("table");
 
     const headingElements = Array.from(
       tableElement.querySelectorAll("thead tr th")
@@ -74,13 +90,14 @@ describe("Table element", () => {
         ]
       ]
     };
-    const tableElement = TableElement({ body: body });
+    ReactDOM.render(TableElement({ body }), containerElement);
+    const tableElement = containerElement.querySelector("table");
 
     const rowElements = Array.from(tableElement.querySelectorAll("tbody tr"));
     rowElements.forEach((rowElement, rowIndex) => {
       const datumElements = rowElement.querySelectorAll("td");
       datumElements.forEach((datumElement, datumIndex) => {
-        expect(datumElement.innerText).toBe(
+        expect(datumElement.textContent).toBe(
           body.rows[rowIndex][datumIndex].text
         );
       });
@@ -98,7 +115,8 @@ describe("Table element", () => {
         [{ classList: ["lorem"] }, { classList: ["dolor", "ipsum"] }]
       ]
     };
-    const tableElement = TableElement({ body: body });
+    ReactDOM.render(TableElement({ body }), containerElement);
+    const tableElement = containerElement.querySelector("table");
 
     const rowElements = Array.from(tableElement.querySelectorAll("tbody tr"));
     rowElements.forEach((rowElement, rowIndex) => {

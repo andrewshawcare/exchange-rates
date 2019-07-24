@@ -1,10 +1,11 @@
+import ReactDOM from "react-dom";
 import ApplicationElement from "../application-element/index.js";
 
 export default ({ exchangeRatesService } = {}) => {
   let latestExchangeRates;
   let dialog = {};
 
-  const rootElement = document.createElement("article");
+  const containerElement = document.createElement("article");
   const fetchExchangeRates = async () => {
     dialog = {
       text: "Fetching latest exchange rates…",
@@ -13,7 +14,7 @@ export default ({ exchangeRatesService } = {}) => {
     render();
     try {
       latestExchangeRates = await exchangeRatesService.getLatestExchangeRates();
-      dialog = {};
+      dialog = { open: false };
       render();
     } catch (error) {
       dialog = {
@@ -28,11 +29,13 @@ export default ({ exchangeRatesService } = {}) => {
     const applicationElement = ApplicationElement({
       dialog: dialog,
       fetchExchangeRatesButton: {
-        onclick: fetchExchangeRates,
+        className: "fetch exchange rates",
+        onClick: fetchExchangeRates,
         text: "Fetch exchange rates"
       },
       exchangeRatesTable: latestExchangeRates
         ? {
+            className: "exchange rates",
             caption: {
               text: `Last updated on ${latestExchangeRates.date}`
             },
@@ -66,11 +69,10 @@ export default ({ exchangeRatesService } = {}) => {
         : {}
     });
 
-    rootElement.innerHTML = "";
-    rootElement.appendChild(applicationElement);
+    ReactDOM.render(applicationElement, containerElement);
   };
 
   render();
 
-  return rootElement;
+  return containerElement;
 };

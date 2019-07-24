@@ -1,21 +1,37 @@
+import ReactDOM from "react-dom";
 import DialogElement from "./index.js";
 
 describe("Dialog element", () => {
+  let containerElement;
+
+  beforeEach(() => {
+    containerElement = document.createElement("div");
+    document.body.appendChild(containerElement);
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
   it("is a dialog", () => {
-    expect(DialogElement().nodeName).toBe("DIALOG");
+    ReactDOM.render(DialogElement(), containerElement);
+    const dialogElement = containerElement.querySelector("dialog");
+
+    expect(dialogElement.nodeName).toBe("DIALOG");
   });
 
-  it("has the correct class", () => {
-    expect(DialogElement().classList.contains("dialog")).toBe(true);
-  });
+  it("renders the text correctly", () => {
+    const text = "Lorem ipsum";
+    ReactDOM.render(DialogElement({ text }), containerElement);
+    const dialogElement = containerElement.querySelector("dialog");
 
-  it("renders the text label correctly", () => {
-    const textLabel = "Lorem ipsum";
-
-    expect(DialogElement({ text: textLabel }).innerText).toBe(textLabel);
+    expect(dialogElement.textContent).toBe(text);
   });
 
   it("renders closed by default", () => {
-    expect(DialogElement().open).toBe(false);
+    ReactDOM.render(DialogElement(), containerElement);
+    const dialogElement = containerElement.querySelector("dialog");
+
+    expect(dialogElement.open).toBe(false);
   });
 });

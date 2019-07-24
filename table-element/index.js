@@ -1,58 +1,65 @@
-export default ({ caption, header, body } = {}) => {
-  const tableElement = document.createElement("table");
+import React from "react";
 
-  tableElement.classList.add("table");
+export default (props = {}) => {
+  const children = [];
 
-  if (caption) {
-    const { text } = caption;
-    const captionElement = document.createElement("caption");
-    captionElement.innerText = text;
-    tableElement.appendChild(captionElement);
+  if (props.caption) {
+    const { text } = props.caption;
+
+    children.push(React.createElement("caption", null, text));
   }
 
-  if (header) {
-    const { headings = [] } = header;
-    const headerElement = document.createElement("thead");
-    const rowElement = document.createElement("tr");
-    rowElement.append(
-      ...headings.map(heading => {
-        const { text = "", classList = [] } = heading;
-        const headingElement = document.createElement("th");
+  if (props.header) {
+    const { headings = [] } = props.header;
 
-        headingElement.classList.add(...classList);
-        headingElement.innerText = text;
+    children.push(
+      React.createElement(
+        "thead",
+        null,
+        React.createElement(
+          "tr",
+          null,
+          ...headings.map(heading => {
+            const { text = "", classList = [] } = heading;
 
-        return headingElement;
-      })
-    );
-    headerElement.appendChild(rowElement);
-    tableElement.appendChild(headerElement);
-  }
-
-  if (body) {
-    const { rows = [] } = body;
-    const bodyElement = document.createElement("tbody");
-    bodyElement.append(
-      ...rows.map(row => {
-        const rowElement = document.createElement("tr");
-
-        rowElement.append(
-          ...row.map(datum => {
-            const { text = "", classList = [] } = datum;
-            const datumElement = document.createElement("td");
-
-            datumElement.classList.add(...classList);
-            datumElement.innerText = text;
-
-            return datumElement;
+            return React.createElement(
+              "th",
+              { className: classList.join(" ") },
+              text
+            );
           })
-        );
-
-        return rowElement;
-      })
+        )
+      )
     );
-    tableElement.appendChild(bodyElement);
   }
 
-  return tableElement;
+  if (props.body) {
+    const { rows = [] } = props.body;
+
+    children.push(
+      React.createElement(
+        "tbody",
+        null,
+        ...rows.map(row => {
+          return React.createElement(
+            "tr",
+            null,
+            ...row.map(datum => {
+              const { text = "", classList = [] } = datum;
+
+              return React.createElement(
+                "td",
+                {
+                  className: classList.join(" ")
+                },
+                text
+              );
+            })
+          );
+        })
+      )
+    );
+  }
+
+  return React.createElement("table", props, ...children);
 };

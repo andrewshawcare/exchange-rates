@@ -1,9 +1,3 @@
-export default ({ text = "", onclick = () => {} } = {}) => {
-  const buttonElement = document.createElement("button");
+import React from "react";
 
-  buttonElement.classList.add("button");
-  buttonElement.innerText = text;
-  buttonElement.onclick = onclick;
-
-  return buttonElement;
-};
+export default (props = {}) => React.createElement("button", props, props.text);

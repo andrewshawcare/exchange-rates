@@ -1,9 +1,3 @@
-export default ({ text = "", open = false } = {}) => {
-  const dialogElement = document.createElement("dialog");
+import React from "react";
 
-  dialogElement.classList.add("dialog");
-  dialogElement.open = open;
-  dialogElement.innerText = text;
-
-  return dialogElement;
-};
+export default (props = {}) => React.createElement("dialog", props, props.text);

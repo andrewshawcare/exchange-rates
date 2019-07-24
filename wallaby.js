@@ -4,7 +4,10 @@ module.exports = () => {
     tests: ["./{,!(dist|node_modules)/**}/test.js"],
     env: {
       type: "node",
-      runner: "node"
+      runner: "node",
+      params: {
+        runner: `-r ${require.resolve("esm")}`
+      }
     },
     testFramework: "jasmine",
     setup: wallaby => {

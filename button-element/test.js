@@ -1,21 +1,36 @@
+import ReactDOM from "react-dom";
 import ButtonElement from "./index.js";
 
 describe("Button", () => {
-  it("is a button", () => {
-    expect(ButtonElement().nodeName).toBe("BUTTON");
+  let containerElement;
+
+  beforeEach(() => {
+    containerElement = document.createElement("div");
+    document.body.appendChild(containerElement);
   });
 
-  it("has the correct class", () => {
-    expect(ButtonElement().classList.contains("button")).toBe(true);
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("is a button", () => {
+    ReactDOM.render(ButtonElement(), containerElement);
+    const buttonElement = containerElement.querySelector("button");
+
+    expect(buttonElement.nodeName).toBe("BUTTON");
   });
 
   it("renders the text correctly", () => {
     const text = "Lorem ipsum";
+    ReactDOM.render(ButtonElement({ text }), containerElement);
+    const buttonElement = containerElement.querySelector("button");
 
-    expect(ButtonElement({ text: text }).innerText).toBe(text);
+    expect(buttonElement.textContent).toBe(text);
   });
 
   it("responds to a click", async done => {
-    ButtonElement({ onclick: done }).click();
+    ReactDOM.render(ButtonElement({ onClick: done }), containerElement);
+    const buttonElement = containerElement.querySelector("button");
+    buttonElement.click();
   });
 });
