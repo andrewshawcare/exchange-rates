@@ -1,31 +1,49 @@
+import { createStore } from "redux";
 import ReactDOM from "react-dom";
 import ApplicationElement from "../application-element/index.js";
 
 export default ({ exchangeRatesService } = {}) => {
-  let latestExchangeRates;
-  let dialog = {};
+  const store = createStore(
+    (state = { latestExchangeRates: undefined, dialog: {} }, action) => {
+      switch (action.type) {
+        case "SHOW_DIALOG":
+          state.dialog.open = true;
+          state.dialog.text = action.text;
+          break;
+        case "HIDE_DIALOG":
+          state.dialog.open = false;
+          break;
+        case "UPDATE_LATEST_EXCHANGE_RATES":
+          state.latestExchangeRates = action.latestExchangeRates;
+          break;
+      }
+      return state;
+    }
+  );
 
   const containerElement = document.createElement("article");
   const fetchExchangeRates = async () => {
-    dialog = {
-      text: "Fetching latest exchange rates…",
-      open: true
-    };
-    render();
+    store.dispatch({
+      type: "SHOW_DIALOG",
+      text: "Fetching latest exchange rates…"
+    });
     try {
-      latestExchangeRates = await exchangeRatesService.getLatestExchangeRates();
-      dialog = { open: false };
-      render();
+      store.dispatch({
+        type: "UPDATE_LATEST_EXCHANGE_RATES",
+        latestExchangeRates: await exchangeRatesService.getLatestExchangeRates()
+      });
+      store.dispatch({ type: "HIDE_DIALOG" });
     } catch (error) {
-      dialog = {
-        text: "Error fetching exchange rates. Please try again later.",
-        open: true
-      };
-      render();
+      store.dispatch({
+        type: "SHOW_DIALOG",
+        text: "Error fetching exchange rates. Please try again later."
+      });
     }
   };
 
   const render = () => {
+    const { dialog, latestExchangeRates } = store.getState();
+
     const applicationElement = ApplicationElement({
       dialog: dialog,
       fetchExchangeRatesButton: {
@@ -71,6 +89,8 @@ export default ({ exchangeRatesService } = {}) => {
 
     ReactDOM.render(applicationElement, containerElement);
   };
+
+  store.subscribe(render);
 
   render();
 
