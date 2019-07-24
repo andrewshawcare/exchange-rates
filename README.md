@@ -3,7 +3,7 @@ A user interface that displays the latest exchange rates
 
 ## Deployment
 
-This application is deployed using [GitHub Pages](https://pages.github.com/) at (https://andrewshawcare.com/exchange-rates/)[https://andrewshawcare.com/exchange-rates/].
+This application is deployed using [GitHub Pages](https://pages.github.com/) at [https://andrewshawcare.com/exchange-rates/](https://andrewshawcare.com/exchange-rates/).
 
 ## Getting started
 
