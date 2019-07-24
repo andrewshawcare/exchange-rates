@@ -1,6 +1,10 @@
 # exchange-rates
 A user interface that displays the latest exchange rates
 
+## Deployment
+
+This application is deployed using [GitHub Pages](https://pages.github.com/) at (https://andrewshawcare.com/exchange-rates/)[https://andrewshawcare.com/exchange-rates/].
+
 ## Getting started
 
 ### Local development
@@ -15,5 +19,3 @@ There is a `pre-commit` git hook that runs the following activities:
 2. **Linting**: Linting is handled using [ESLint](https://eslint.org/).
 3. **Testing**: Testing is performed using [Jasmine](https://jasmine.github.io/).
 4. **Bundling**: Bundling is handled using [Rollup](https://rollupjs.org).
-
-This step also adds bundled assets into the `dist` folder as an artifact for GitHub Pages.
