@@ -14,7 +14,14 @@ const jsdom = new JSDOM(
 );
 
 global.document = jsdom.window.document;
-const filteredProperties = ["setTimeout"];
+const filteredProperties = [
+  "setTimeout",
+  "Infinity",
+  "NaN",
+  "undefined",
+  "crypto",
+  "performance"
+];
 Object.getOwnPropertyNames(jsdom.window)
   .filter(ownPropertyName => !filteredProperties.includes(ownPropertyName))
   .forEach(ownPropertyName => {
